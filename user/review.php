@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO reviews VALUES ('','$rating', '$review')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Review added successfully.";
+        echo "Review berhasil ditambah.";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -48,7 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <div>
             <label for="review">Review:</label>
-            <textarea id="review" name="review" placeholder="Write your review here..."></textarea>
+            <input type="text" id="review" name="review" required>
+            <!-- <textarea id="review" name="review" placeholder="Write your review here..."></textarea> -->
         </div>
 
         <button type="submit">Submit</button>
