@@ -54,9 +54,10 @@
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
             <div class="game-card">
-                <img src="<?php echo $row['image']; ?>" alt="Game Image">
+                <img src="<?php echo $row['thumbnail']; ?>" alt="Game thumbnail">
                 <h3><?php echo $row['name']; ?></h3>
                 <p>Category: <?php echo $row['category']; ?></p>
+                <p>Description: <?php echo $row['description']; ?></p>
                 <p>
                     <a href='../user/review.php?id=<?php echo $row['id']; ?>'>Review</a> |
                     <a href='../user/detail.php?id=<?php echo $row['id']; ?>&game_id=<?php echo $row['id']; ?>'>Detail</a> 

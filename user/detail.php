@@ -26,6 +26,40 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Details</title>
+    <style>
+        .carousel-container {
+            max-width: 300px;
+            max-height: 300px;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-item {
+            width: 100%;
+        }
+
+        #prevBtn, #nextBtn {
+            cursor: pointer;
+            font-size: 24px;
+            color: #333;
+            background-color: #fff;
+            border: none;
+            outline: none;
+        }
+
+        #prevBtn {
+            float: left;
+        }
+
+        #nextBtn {
+            float: right;
+        }
+    </style>
 </head>
 
 <body>
@@ -36,7 +70,32 @@ if (isset($_GET['id'])) {
         <h2><?php echo $gameRow['name']; ?> Details</h2>
 
         <p>Category: <?php echo $gameRow['category']; ?></p>
-        <img src="<?php echo $gameRow['image']; ?>" alt="Game Image" style="max-width: 300px;">
+        <img src="<?php echo $gameRow['thumbnail']; ?>" alt="Game thumbnail" style="max-width: 300px;">
+
+        <!-- Carousel for displaying images -->
+        <?php
+        $imagePaths = explode(",", $gameRow['images']);
+        if (!empty($imagePaths)) {
+        ?>
+            <div class="carousel-container">
+                <button id="prevBtn">&lt;</button>
+                <button id="nextBtn">&gt;</button>
+                <br>
+                <div class="carousel-track">
+                    <?php
+                    foreach ($imagePaths as $imagePath) {
+                    ?>
+                        <div class="carousel-item">
+                            <img src="<?php echo $imagePath; ?>" alt="Game Image">
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
 
         <h3>Reviews:</h3>
 
@@ -60,6 +119,37 @@ if (isset($_GET['id'])) {
     // Close database connection
     mysqli_close($conn);
     ?>
+
+    <script>
+        const track = document.querySelector('.carousel-track');
+        const items = document.querySelectorAll('.carousel-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < items.length - 1) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = items.length - 1;
+            }
+            updateCarousel();
+        });
+
+        function updateCarousel() {
+            const newPosition = -currentIndex * 100 + '%';
+            track.style.transform = 'translateX(' + newPosition + ')';
+        }
+    </script>
 </body>
 
 </html>

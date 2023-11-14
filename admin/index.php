@@ -54,9 +54,10 @@
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
             <div class="game-card">
-                <img src="<?php echo $row['image']; ?>" alt="Game Image">
+                <img src="<?php echo $row['thumbnail']; ?>" alt="Game thumbnail">
                 <h3><?php echo $row['name']; ?></h3>
                 <p>Category: <?php echo $row['category']; ?></p>
+                <p>Description: <?php echo $row['description']; ?></p>
                 <p>
                     <a href='edit.php?id=<?php echo $row['id']; ?>'>Edit</a> | 
                     <a href='delete.php?id=<?php echo $row['id']; ?>' onclick='return confirm("Are you sure you want to delete this game?")'>Delete</a> |

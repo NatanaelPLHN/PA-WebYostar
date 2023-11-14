@@ -2,25 +2,39 @@
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Include your database connection file
-    require"../connection.php";
+    require "../connection.php";
 
     // Collect form data
     $name = $_POST["name"];
     $category = $_POST["category"];
+    $description = $_POST["description"];
 
-    // Process image upload
-    $targetDirectory = "../resources/imgs/uploads/"; // Specify your upload directory
-    $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
+    // Process thumbnail upload
+    $thumbnailDirectory = "../resources/imgs/thumbnails/"; // Specify thumbnail upload directory
+    $thumbnailPath = $thumbnailDirectory . basename($_FILES["thumbnail"]["name"]);
 
-    // Insert data into the database
-    $sql = "INSERT INTO games VALUES ('','$name', '$category', '$targetFile')";
-    
-    if (mysqli_query($conn, $sql)) {
-        // If the insertion is successful, move the uploaded file to the target directory
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            echo "Game added successfully.";
+    // Handle multiple image uploads
+    $imagePaths = [];
+    $imageDirectory = "../resources/imgs/images/"; // Specify images upload directory
+    foreach ($_FILES["images"]["tmp_name"] as $key => $tmp_name) {
+        $imageFile = $imageDirectory . basename($_FILES["images"]["name"][$key]);
+        if (move_uploaded_file($tmp_name, $imageFile)) {
+            $imagePaths[] = $imageFile;
         } else {
             echo "Error moving uploaded file.";
+            exit; // Exit the script if an error occurs
+        }
+    }
+
+    // Insert data into the database
+    $sql = "INSERT INTO games (name, category, description, thumbnail, images) VALUES ('$name', '$category', '$description', '$thumbnailPath', '" . implode(",", $imagePaths) . "')";
+
+    if (mysqli_query($conn, $sql)) {
+        // If the insertion is successful, move the uploaded files to their respective directories
+        if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $thumbnailPath)) {
+            echo "Game added successfully.";
+        } else {
+            echo "Error moving thumbnail file.";
         }
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -30,6 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_close($conn);
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,9 +65,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="category">Category:</label>
         <input type="text" id="category" name="category" required>
 
-        <!-- image field -->
-        <label for="image">image:</label>
-        <input type="file" id="image" name="image" required>
+        <!-- description field -->
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+
+        <!-- thumbnail field -->
+        <label for="thumbnail">Thumbnail:</label>
+        <input type="file" id="thumbnail" name="thumbnail" required>
+        
+        <!-- images field -->
+        <label for="images">Images:</label>
+        <input type="file" id="images" name="images[]" multiple required>
+
 
         <!-- Submit button -->
         <button type="submit">Add Game</button>
