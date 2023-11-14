@@ -1,20 +1,36 @@
 <?php
-
+// Include your database connection file
 require "../connection.php";
 
+// Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $rating = $_POST["rating"];
-    $review = $_POST["review"];
+    // Collect form data
+    $rating = isset($_POST["rating"]) ? $_POST["rating"] : "";
+    $review = isset($_POST["review"]) ? $_POST["review"] : "";
+    $game_id = isset($_POST["game_id"]) ? $_POST["game_id"] : "";
 
-    $sql = "INSERT INTO reviews VALUES ('','$rating', '$review')";
+    // Insert review into the database
+    $sql = "INSERT INTO reviews (rating, review, game_id) VALUES ('$rating', '$review', '$game_id')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "Review berhasil ditambah.";
+        echo "Review added successfully.";
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
+
+    // Close database connection
+    mysqli_close($conn);
 }
 
+// Check if 'id' is set in the URL parameters
+if (isset($_GET['id'])) {
+    // Get the 'id' from the URL parameter
+    $id = $_GET['id'];
+} else {
+    // Handle the case where 'id' is not set (you may redirect the user or show an error message)
+    echo "Error: Game ID is not set.";
+    exit; // or handle the error in another way
+}
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="review" name="review" required>
             <!-- <textarea id="review" name="review" placeholder="Write your review here..."></textarea> -->
         </div>
+
+        <input type="hidden" name="game_id" value="<?php echo $id; ?>">
 
         <button type="submit">Submit</button>
 

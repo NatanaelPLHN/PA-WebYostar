@@ -1,10 +1,23 @@
 <?php
     // Include your database connection file
-    include("../connection.php"); // Replace with your actual file name
+    include("../connection.php"); 
+
+    // Check if the connection is successful
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
 
     // Fetch data from the database
     $result = mysqli_query($conn, "SELECT * FROM games");
 ?>
+
+<!-- Your HTML and PHP code for displaying games here -->
+
+<?php
+    // Close the database connection
+    mysqli_close($conn);
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,39 +25,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Games</title>
+    <style>
+        /* Add some basic styling for cards */
+        .game-card {
+            border: 1px solid #ddd;
+            margin: 10px;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+            float: left;
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
+
 <body>
     <h2>Game List</h2>
 
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Image</th>
-            <th>Action</th>
-        </tr>
-
+    <div>
         <?php
-        // Loop through the database results and display them in the table
+        // Loop through the database results and display them in cards
         while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>{$row['id']}</td>";
-            echo "<td>{$row['name']}</td>";
-            echo "<td>{$row['category']}</td>";
-            echo "<td><img src='{$row['image']}' alt='Game Image' width='100'></td>";
-            echo "<td>
-                    <a href='edit.php?id={$row['id']}'>Edit</a> | 
-                    <a href='delete.php?id={$row['id']}' onclick='return confirm(\"Are you sure you want to delete this game?\")'>Delete</a>
-                  </td>";
-            echo "</tr>";
+        ?>
+            <div class="game-card">
+                <img src="<?php echo $row['image']; ?>" alt="Game Image">
+                <h3><?php echo $row['name']; ?></h3>
+                <p>Category: <?php echo $row['category']; ?></p>
+                <button onclick="showDetails('<?php echo $row['id']; ?>')">Details</button>
+                <p>
+                    <a href='edit.php?id=<?php echo $row['id']; ?>'>Edit</a> | 
+                    <a href='delete.php?id=<?php echo $row['id']; ?>' onclick='return confirm("Are you sure you want to delete this game?")'>Delete</a> |
+                    <a href='../user/review.php?id=<?php echo $row['id']; ?>'>Review</a> |
+                    <a href='../user/detail.php?id=<?php echo $row['id']; ?>&game_id=<?php echo $row['id']; ?>'>Detail</a> 
+                </p>
+            </div>
+        <?php
         }
         ?>
-    </table>
+    </div>
 
     <?php
     // Close database connection
-    mysqli_close($conn);
     ?>
 </body>
 </html>
