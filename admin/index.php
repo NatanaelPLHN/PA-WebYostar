@@ -61,7 +61,7 @@
                 <p>
                     <a href='edit.php?id=<?php echo $row['id']; ?>'>Edit</a> | 
                     <a href='delete.php?id=<?php echo $row['id']; ?>' onclick='return confirm("Are you sure you want to delete this game?")'>Delete</a> |
-                    <a href='../user/review.php?id=<?php echo $row['id']; ?>'>Review</a> |
+                    <a href='lihat-review.php?id=<?php echo $row['id']; ?>'>Lihat Review</a> |
                     <a href='../user/detail.php?id=<?php echo $row['id']; ?>&game_id=<?php echo $row['id']; ?>'>Detail</a> 
                 </p>
             </div>
@@ -69,9 +69,5 @@
         }
         ?>
     </div>
-
-    <?php
-    // Close database connection
-    ?>
 </body>
 </html>
