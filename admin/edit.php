@@ -15,6 +15,7 @@ if (isset($_GET['id'])) {
         // Collect updated form data
         $name = mysqli_real_escape_string($conn, $_POST["name"]);
         $category = mysqli_real_escape_string($conn, $_POST["category"]);
+        $description = mysqli_real_escape_string($conn, $_POST["description"]);
 
         // Process thumbnail upload if a new thumbnail is selected
         if (!empty($_FILES["thumbnail"]["name"])) {
@@ -22,7 +23,7 @@ if (isset($_GET['id'])) {
             $targetFile = $targetDirectory . basename($_FILES["thumbnail"]["name"]);
 
             // Update the data in the database
-            $updateSql = "UPDATE games SET name='$name', category='$category', thumbnail='$targetFile' WHERE id=$id";
+            $updateSql = "UPDATE games SET name='$name', category='$category', description='$description', thumbnail='$targetFile' WHERE id=$id";
 
             if (mysqli_query($conn, $updateSql) && move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $targetFile)) {
                 echo "Record updated successfully.";
@@ -31,7 +32,7 @@ if (isset($_GET['id'])) {
             }
         } else {
             // Update the data in the database without changing the thumbnail
-            $updateSql = "UPDATE games SET name='$name', category='$category' WHERE id=$id";
+            $updateSql = "UPDATE games SET name='$name', category='$category', description='$description' WHERE id=$id";
 
             if (mysqli_query($conn, $updateSql)) {
                 echo "Record updated successfully.";
@@ -42,36 +43,48 @@ if (isset($_GET['id'])) {
     }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Game</title>
-</head>
-<body>
-    <h2>Edit Game</h2>
+    <!DOCTYPE html>
+    <html lang="en">
 
-    <form action="" method="post" enctype="multipart/form-data">
-        <!-- name field -->
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" required>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edit Game</title>
+    </head>
 
-        <!-- category field -->
-        <label for="category">Category:</label>
-        <input type="text" id="category" name="category" value="<?php echo $row['category']; ?>" required>
+    <body>
+        <h2>Edit Game</h2>
 
-        <!-- thumbnail field -->
-        <label for="thumbnail">thumbnail:</label>
-        <input type="file" id="thumbnail" name="thumbnail">
-        <p>Current thumbnail: <img src="<?php echo $row['thumbnail']; ?>" alt="Current Game thumbnail" width="100"></p>
+        <form action="" method="post" enctype="multipart/form-data">
+            <!-- name field -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<?php echo $row['name']; ?>" required>
 
-        <!-- Submit button -->
-        <button type="submit">Update Game</button>
-    </form>
+            <!-- category field -->
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" value="<?php echo $row['category']; ?>" required>
 
-</body>
-</html>
+            <!-- description field -->
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required>
+
+            <!-- thumbnail field -->
+            <label for="thumbnail">thumbnail:</label>
+            <input type="file" id="thumbnail" name="thumbnail">
+            <p>Current thumbnail: <img src="<?php echo $row['thumbnail']; ?>" alt="Current Game thumbnail" width="100"></p>
+
+            <!-- images field -->
+            <!-- <label for="images">Images:</label> -->
+            <!-- <input type="file" id="images" name="images[]" multiple required> -->
+
+
+            <!-- Submit button -->
+            <button type="submit">Update Game</button>
+        </form>
+
+    </body>
+
+    </html>
 
 <?php
 } else {

@@ -73,9 +73,9 @@ $result = mysqli_query($conn, "SELECT * FROM games");
                         </a>
                     </li>
                     <li style="--bg:#333;">
-                        <a href="#">
+                        <a href="login/login.php">
                             <div class="icon"><img src="resources/imgs/assets/right-from-bracket-solid.svg"></div>
-                            <div class="text">LOGOUT</div>
+                            <div class="text">LOGIN</div>
                         </a>
                     </li>
                 </div>
@@ -116,6 +116,10 @@ $result = mysqli_query($conn, "SELECT * FROM games");
                         <img src="PAWEB/<?php echo $row['thumbnail']; ?>" alt="<?php echo $row['name']; ?>">
                         <h3><?php echo $row['name']; ?></h3>
                         <p>Description: <?php echo $row['description']; ?></p>
+                        <p>
+                            <a href='user/review.php?id=<?php echo $row['id']; ?>'>Review</a> |
+                            <a href='user/detail.php?id=<?php echo $row['id']; ?>&game_id=<?php echo $row['id']; ?>'>Detail</a>
+                        </p>
                     </div>
                 <?php
             }
