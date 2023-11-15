@@ -114,7 +114,6 @@ $result = mysqli_query($conn, "SELECT * FROM games");
                 <div class="game-list">
                     <div class="game-entry">
                         <img src="PAWEB/<?php echo $row['thumbnail']; ?>" alt="<?php echo $row['name']; ?>">
-
                         <h3><?php echo $row['name']; ?></h3>
                         <p>Description: <?php echo $row['description']; ?></p>
                     </div>
