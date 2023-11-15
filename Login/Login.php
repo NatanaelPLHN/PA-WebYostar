@@ -11,14 +11,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
         // Query untuk memeriksa sebelumnya apakah email sudah terdaftar atau tidak
-        $checkQuery = "SELECT * FROM user WHERE email='$email'";
+        $checkQuery = "SELECT * FROM login WHERE email='$email'";
         $checkResult = mysqli_query($conn, $checkQuery);
 
         if (mysqli_num_rows($checkResult) > 0) {
             echo "<script>alert('Email sudah terdaftar, tolong gunakan email lainnya');</script>";
         } else {
             // Query untuk menambahkan data ke database karena email belum terdaftar
-            $insertQuery = "INSERT INTO user (username, email, password) VALUES ('$username', '$email', '$password')";
+            $insertQuery = "INSERT INTO login (username, email, password) VALUES ('$username', '$email', '$password')";
             
             if (mysqli_query($conn, $insertQuery)) {
                 echo "<script>alert('Akun berhasil dibuat!');</script>";
@@ -34,12 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
         // Query untuk memeriksa kecocokan data login
-        $query = "SELECT * FROM user WHERE email='$email' AND password='$password'";
+        $query = "SELECT * FROM login WHERE email='$email' AND password='$password'";
         
         $result = mysqli_query($conn, $query);
 
         if (mysqli_num_rows($result) == 1) {
-            echo "<script>window.location.href = 'abc.php';</script>";
+            echo "<script>window.location.href = '../index.php';</script>";
             exit();
         } else {
             echo "<script>alert('Invalid email atau password');</script>";
