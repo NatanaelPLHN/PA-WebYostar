@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Process thumbnail upload
     $thumbnailDirectory = "../resources/imgs/thumbnails/"; // Specify thumbnail upload directory
-    $thumbnailPath = $thumbnailDirectory . basename($_FILES["thumbnail"]["name"]);
+    $thumbnailPath = "resources/imgs/thumbnails/" . basename($_FILES["thumbnail"]["name"]);
 
     // Handle multiple image uploads
     $imagePaths = [];
@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert data into the database
+    // $sql = "INSERT INTO games (name, category, description, thumbnail, images) VALUES ('$name', '$category', '$description', '$thumbnailPath', '" . implode(",", $imagePaths) . "')";
     $sql = "INSERT INTO games (name, category, description, thumbnail, images) VALUES ('$name', '$category', '$description', '$thumbnailPath', '" . implode(",", $imagePaths) . "')";
 
     if (mysqli_query($conn, $sql)) {
