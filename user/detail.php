@@ -34,21 +34,19 @@ if (isset($_GET['id'])) {
     // Check if game details are found
     if ($gameRow = mysqli_fetch_assoc($gameResult)) {
     ?>
-    <div class="details-container">
-        <h2><?php echo $gameRow['name']; ?> Details</h2>
+        <div class="details-container">
+            <h2><?php echo $gameRow['name']; ?> Details</h2>
 
-        <p>Category: <?php echo $gameRow['category']; ?></p>
-        <img src="<?php echo $gameRow['thumbnail']; ?>" alt="Game thumbnail" style="max-width: 300px;">
-    </div>
+            <p>Category: <?php echo $gameRow['category']; ?></p>
+            <p>Description: <?php echo $gameRow['description']; ?></p>
+            <img src="<?php echo $gameRow['thumbnail']; ?>" alt="Game thumbnail" style="max-width: 300px;">
+        </div>
         <!-- Carousel for displaying images -->
         <?php
         $imagePaths = explode(",", $gameRow['images']);
         if (!empty($imagePaths)) {
         ?>
             <div class="carousel-container">
-                <button id="prevBtn">&lt;</button>
-                <button id="nextBtn">&gt;</button>
-                <br>
                 <div class="carousel-track">
                     <?php
                     foreach ($imagePaths as $imagePath) {
@@ -61,24 +59,31 @@ if (isset($_GET['id'])) {
                     ?>
                 </div>
             </div>
-        <?php
-        }
-        ?>
 
-        <h3>Reviews:</h3>
-
-        <div class="reviews-section">
-        <?php
-        // Loop through reviews and display them
-        while ($reviewRow = mysqli_fetch_assoc($reviewsResult)) {
-        ?>
-            <div class="review-box">
-            <p class="review-rating">Rating: <?php echo $reviewRow['rating']; ?></p>
-            <p class="review-text">Review: <?php echo $reviewRow['review']; ?></p>
+            <div class="carousel-controls">
+                <button id="prevBtn">&lt; Previous</button>
+                <a href="../index.php" class="back-btn">Back</a>
+                <button id="nextBtn">Next &gt;</button>
             </div>
         <?php
         }
         ?>
+
+
+        <h3>Reviews:</h3>
+
+        <div class="reviews-section">
+            <?php
+            // Loop through reviews and display them
+            while ($reviewRow = mysqli_fetch_assoc($reviewsResult)) {
+            ?>
+                <div class="review-box">
+                    <p class="review-rating">Rating: <?php echo $reviewRow['rating']; ?></p>
+                    <p class="review-text">Review: <?php echo $reviewRow['review']; ?></p>
+                </div>
+            <?php
+            }
+            ?>
         </div>
     <?php
     } else {

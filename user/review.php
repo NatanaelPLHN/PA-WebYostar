@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conn, $sql)) {
         echo "Review added successfully.";
+        header("Location: ../index.php");
     } else {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
@@ -73,7 +74,7 @@ if (isset($_GET['id'])) {
         <div class="review-section">
             <label for="review">Review:</label>
             <input type="text" id="review" name="review" required>
-            <button type="button" onclick="window.location.href='index.php'">Back</button>
+            <button type="button" onclick="window.location.href='../index.php'">Back</button>
             <!-- <textarea id="review" name="review" placeholder="Write your review here..."></textarea> -->
         </div>
 

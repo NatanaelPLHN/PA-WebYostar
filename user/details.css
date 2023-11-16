@@ -39,61 +39,68 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .carousel-container {
-      position: relative;
-      max-width: 600px;
-      margin: 20px auto;
-      overflow: hidden;
-  }
-  
-  .carousel-track {
-      display: flex;
-      transition: transform 0.3s ease-in-out;
-  }
-  
-  .carousel-item {
-      flex: 0 0 100%;
-      box-sizing: border-box;
-  }
 
-  #prevBtn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 20px;
-      background: #e68a00;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-  }
-  
-  #nextBtn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 20px;
-      background: #e68a00;
-      color: #fff;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: background-color 0.3s;
-  }
-  
-  #prevBtn:hover,
-  #nextBtn:hover {
-      background-color: #cc7a00;
-  }
-  
-  img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px; /* Optional: Add border-radius to images */
-  }
+    .carousel-container {
+        position: relative;
+        max-width: 600px;
+        margin: 20px auto;
+        overflow: hidden;
+    }
+    
+    .carousel-track {
+        display: flex;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .carousel-item {
+        flex: 0 0 100%;
+        box-sizing: border-box;
+    }
+    
+    .carousel-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+    
+    #prevBtn,
+    #nextBtn {
+        font-size: 16px;
+        background: #e68a00;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+    
+    #prevBtn:hover,
+    #nextBtn:hover {
+        background-color: #cc7a00;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+    
+    .back-btn {
+        font-size: 16px;
+        background: #e68a00; 
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        margin-right: 10px;
+        transition: background-color 0.3s;
+    }
+    
+    .back-btn:hover {
+        background-color: #cc7a00;
+    }
   
 
     h3 {

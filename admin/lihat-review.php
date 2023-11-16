@@ -34,38 +34,27 @@ if (isset($_GET['id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD Review</title>
+    <link rel="stylesheet" href="../user/details.css">
 </head>
 
 <body>
-    <?php
-    // Check if game details are found
-    if ($gameRow = mysqli_fetch_assoc($gameResult)) {
-    ?>
-        <h2><?php echo $gameRow['name']; ?> Details</h2>
 
+    <div class="reviews-section">
         <h3>Reviews:</h3>
-
         <?php
         // Loop through reviews and display them
         while ($reviewRow = mysqli_fetch_assoc($reviewsResult)) {
         ?>
-            <p>Rating: <?php echo $reviewRow['rating']; ?></p>
-            <p>Review: <?php echo $reviewRow['review']; ?></p>
-            <a href='delete-review.php?id=<?php echo $reviewRow['id']; ?>' onclick='return confirm("Are you sure you want to delete this game?")'>Delete</a> |
+            <div class="review-box">
+                <p class="review-rating">Rating: <?php echo $reviewRow['rating']; ?></p>
+                <p class="review-text">Review: <?php echo $reviewRow['review']; ?></p>
+                <a href='delete-review.php?id=<?php echo $reviewRow['id']; ?>' onclick='return confirm("Are you sure you want to delete this game?")'>Delete</a> 
+
+            </div>
         <?php
         }
         ?>
-    <?php
-    } else {
-        // Handle the case where no game details are found for the specified ID
-        echo "Error: Game details not found.";
-    }
-    ?>
-
-    <?php
-    // Close database connection
-    mysqli_close($conn);
-    ?>
+    </div>
 </body>
 
 </html>

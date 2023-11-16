@@ -247,14 +247,17 @@ body {
 
 .landing-page {
     background-color: #faeee7;
+    background-size: cover;
+    background: url('../imgs/assets/media-profile-b1g-aFHJA2M-unsplash.jpg');
     padding: 50px 0;
     text-align: center;
+    justify-content: ;
+    align-items: center;
     height: 100vh;
 }
 
 .landing-page h1 {
     font-size: 2em;
-    color: #333;
 }
 
 .landing-page p {
@@ -277,80 +280,82 @@ body {
     background-color: #1e88e5;
 }
 
-.image-gallery {
-    background-color: #fff;
-    padding: 50px 0;
-    text-align: center;
-    height: 100vh;
-}
-
-.image-gallery h2 {
-    font-size: 2em;
-    color: #333;
-}
-
-.gallery {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.gallery img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-    margin: 10px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 #game-list {
-    background-color: #f5f5f5;
-    padding: 50px 0;
-    text-align: center;
+    padding: 40px 0;
     height: 100vh;
+    text-align: center;
+    background-color: #333;
 }
 
-#game-list h2 {
-    font-size: 2em;
-    color: #333;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: white;
 }
 
 .game-list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
     justify-content: center;
-    margin-top: 20px;
 }
 
 .game-entry {
     border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: navy;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
 }
 
+.game-entry:hover {
+    transform: scale(1.05);
+}
+
 .game-entry img {
-    width: 200px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 5px;
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .game-entry h3 {
-    margin-top: 10px;
-    font-size: 1.5em;
-    color: #333;
+    font-size: 1.2em;
+    margin: 10px;
+    color: white;
 }
 
 .game-entry p {
-    color: #666;
+    margin: 10px;
+    color: white;
 }
+
+.game-entry a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #007bff;
+    padding: 10px;
+    background-color: #f8f9fa;
+}
+
+.game-entry a:hover {
+    background-color: #e2e6ea;
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .game-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+
 
 #reviews {
     background-color: #f5f5f5;
@@ -368,8 +373,8 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 20px auto; /* Center the review list */
-    max-width: 800px; /* Set a max width if needed */
+    margin: 20px auto; 
+    max-width: 800px; 
 }
 
 .review-entry {
@@ -378,7 +383,7 @@ body {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Center the text within the review entry */
+    text-align: center; 
 }
 
 .review-entry h3 {

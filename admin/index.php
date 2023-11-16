@@ -31,6 +31,7 @@ mysqli_close($conn);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Games</title>
     <link rel="stylesheet" href="../resources/css/tombol.css">
+    <link rel="stylesheet" href="../resources/css/style.css">
     <link rel="stylesheet" href="../resources/css/admin.css">
     <script src="https://kit.fontawesome.com/b061f84e4f.js" crossorigin="anonymous"></script>
 </head>
@@ -63,6 +64,16 @@ mysqli_close($conn);
                 <p>Click to add a new game</p>
             </div>
         </div>
+
+        <div class="game-card add-game-card" onclick="location.href='create.php';">
+            <div class="add-game-content">
+                <a href="../login/logout.php">
+                    <div class="icon"><img src="../resources/imgs/assets/right-from-bracket-solid.svg"></div>
+                </a>
+                <p>Click to Logout</p>
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
