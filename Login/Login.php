@@ -32,20 +32,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['login'])) {
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
-
+    
         // Query untuk memeriksa kecocokan data login
-        $query = "SELECT * FROM login WHERE email='$email' AND password='$password'";
-        
+        $query = "SELECT * FROM login WHERE email='$email' AND password='$password'"; 
         $result = mysqli_query($conn, $query);
-
-        if (mysqli_num_rows($result) == 1) {
-            echo "<script>window.location.href = 'abc.php';</script>";
-            exit();
+    
+        // Cek apakah ada akun yang di input ada di database
+        if (mysqli_num_rows($result) > 0) {
+            $userData = mysqli_fetch_assoc($result);
+    
+            // Cek jenis akun (admin atau user)
+            if ($userData['username'] === 'admin' && $userData['email'] === 'admin@gmail.com' && $userData['password'] === 'admin123') {
+                // Jika akun adalah admin, redirect ke halaman admin
+                echo "<script>window.location.href = '../admin/index.php';</script>";
+                exit();
+            } else {
+                // Jika bukan akun admin, redirect ke halaman user
+                echo "<script>window.location.href = 'abc.php';</script>";
+                exit();
+            }
         } else {
-            echo "<script>alert('Invalid email atau password');</script>";
+            // Jika tidak ada baris data yang sesuai, berarti akun tidak ada di database
+            echo "<script>alert('Akun tidak ditemukan');</script>";
         }
     }
-}
+}    
 ?>
 
 <!DOCTYPE html>
