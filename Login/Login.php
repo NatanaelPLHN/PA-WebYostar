@@ -1,5 +1,3 @@
-<!-- login.php -->
-
 <?php
 require('../connection.php');
 
@@ -48,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             } else {
                 // Jika bukan akun admin, redirect ke halaman user
-                echo "<script>window.location.href = 'abc.php';</script>";
+                echo "<script>window.location.href = '../index.php';</script>";
                 exit();
             }
         } else {
