@@ -28,14 +28,13 @@ body{
     width: 75%;
     height: 550px;
     margin-top: 20px;
-    background: url(backgroun3.jpg) no-repeat;
+    background: url(wallpaperflare.com_wallpaper.jpg) no-repeat;
     background-position: center;
     background-size:cover ;
     border-radius: 20px;
     overflow: hidden;
-    
-    
 }
+
 .item{
     position: absolute;
     top: 0;
@@ -88,11 +87,11 @@ body{
 .login-section .form-box{
     position: absolute;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
     width: 100%;
     height: 100%;
-    
+    padding-right: 30px;
 }
 .login-section .form-box.register{
     transform: translateX(430px);
