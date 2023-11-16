@@ -17,6 +17,21 @@ if (!$conn) {
 // Fetch data from the database
 $resultgame = mysqli_query($conn, "SELECT * FROM games");
 
+$username = "Not logged in"; // Default value
+
+if (isset($_SESSION['email'])) {
+    $email = $_SESSION['email'];
+
+    // Query to fetch the username from the login table based on the user's email
+    $result = mysqli_query($conn, "SELECT username FROM login WHERE email='$email'");
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        // User found, fetch the username
+        $row = mysqli_fetch_assoc($result);
+        $username = $row['username'];
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -79,7 +94,11 @@ $resultgame = mysqli_query($conn, "SELECT * FROM games");
                             </div>
                             <div class="text">
                                 <?php
-
+                                    if (isset($_SESSION['login'])) {
+                                        echo "Welcome, " . $username;
+                                    } else {
+                                        echo "$username";
+                                    }
                                 ?>
                             </div>
                         </a>
@@ -107,7 +126,7 @@ $resultgame = mysqli_query($conn, "SELECT * FROM games");
         </div>
     </section>
 
-    <section class="image-gallery" id="about">
+    <!-- <section class="image-gallery" id="about">
         <div class="container">
             <h2>Explore Our Gallery</h2>
             <div class="gallery">
@@ -118,7 +137,7 @@ $resultgame = mysqli_query($conn, "SELECT * FROM games");
                 <img src="resources/imgs/assets/27.png" alt="Image 3">
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section id="game-list">
         <div class="container">

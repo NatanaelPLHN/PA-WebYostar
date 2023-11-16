@@ -34,6 +34,7 @@ if (isset($_GET['id'])) {
 
             if (mysqli_query($conn, $updateSql) && move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $targetFile)) {
                 echo "Record updated successfully.";
+                header("Location: index.php");
             } else {
                 echo "Error updating record: " . mysqli_error($conn);
             }
@@ -57,6 +58,8 @@ if (isset($_GET['id'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Edit Game</title>
+        <link rel="stylesheet" href="crete.css">
+
     </head>
 
     <body>
@@ -76,7 +79,7 @@ if (isset($_GET['id'])) {
             <input type="text" id="description" name="description" required>
 
             <!-- thumbnail field -->
-            <label for="thumbnail">thumbnail:</label>
+            <label for="thumbnail">Thumbnail:</label>
             <input type="file" id="thumbnail" name="thumbnail">
             <p>Current thumbnail: <img src="<?php echo $row['thumbnail']; ?>" alt="Current Game thumbnail" width="100"></p>
 
@@ -87,6 +90,9 @@ if (isset($_GET['id'])) {
 
             <!-- Submit button -->
             <button type="submit">Update Game</button>
+            <a href="index.php" class="back-to-index-button">
+                <button type="button">Back</button>
+            </a>
         </form>
 
     </body>

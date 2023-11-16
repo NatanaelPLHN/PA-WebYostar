@@ -19,6 +19,7 @@ if (isset($_GET['id'])) {
     // Execute the DELETE query
     if (mysqli_query($conn, $sql)) {
         echo "Record deleted successfully.";
+        header("Location: index.php");
     } else {
         echo "Error deleting record: " . mysqli_error($conn);
     }

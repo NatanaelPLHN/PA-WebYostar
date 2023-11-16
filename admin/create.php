@@ -43,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // If the insertion is successful, move the uploaded files to their respective directories
         if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $thumbnailPath)) {
             echo "Game added successfully.";
+            header("Location: index.php");
         } else {
             echo "Error moving thumbnail file.";
         }
