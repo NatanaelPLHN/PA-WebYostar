@@ -1,21 +1,15 @@
 <?php
-// Include your database connection file
 include("../connection.php");
 
-// Check if the 'id' parameter is set in the URL
 if (isset($_GET['id'])) {
-    // Get the 'id' from the URL parameter
     $game_id = $_GET['id'];
 
-    // Fetch game details from the games table
     $gameResult = mysqli_query($conn, "SELECT * FROM games WHERE id = $game_id");
 
-    // Fetch reviews for the specified game from the reviews table
     $reviewsResult = mysqli_query($conn, "SELECT * FROM reviews WHERE game_id = $game_id");
 } else {
-    // Handle the case where 'id' is not set (you may redirect the user or show an error message)
     echo "Error: Game ID is not set.";
-    exit; // or handle the error in another way
+    exit; 
 }
 ?>
 
@@ -31,7 +25,6 @@ if (isset($_GET['id'])) {
 
 <body>
     <?php
-    // Check if game details are found
     if ($gameRow = mysqli_fetch_assoc($gameResult)) {
     ?>
         <div class="details-container">
@@ -41,7 +34,6 @@ if (isset($_GET['id'])) {
             <p>Description: <?php echo $gameRow['description']; ?></p>
             <img src="<?php echo $gameRow['thumbnail']; ?>" alt="Game thumbnail" style="max-width: 300px;">
         </div>
-        <!-- Carousel for displaying images -->
         <?php
         $imagePaths = explode(",", $gameRow['images']);
         if (!empty($imagePaths)) {
@@ -74,7 +66,6 @@ if (isset($_GET['id'])) {
 
         <div class="reviews-section">
             <?php
-            // Loop through reviews and display them
             while ($reviewRow = mysqli_fetch_assoc($reviewsResult)) {
             ?>
                 <div class="review-box">
@@ -87,13 +78,11 @@ if (isset($_GET['id'])) {
         </div>
     <?php
     } else {
-        // Handle the case where no game details are found for the specified ID
         echo "Error: Game details not found.";
     }
     ?>
 
     <?php
-    // Close database connection
     mysqli_close($conn);
     ?>
 

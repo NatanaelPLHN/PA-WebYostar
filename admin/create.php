@@ -1,46 +1,38 @@
 <?php
 
-// Include your database connection file
 require "../connection.php";
 session_start();
 
 if (!isset($_SESSION['login']) || !$_SESSION['isAdmin']) {
-    // Redirect to the login page or display an unauthorized message
     header("Location: ../Login/login.php");
     exit();
 }
 
 
-// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Collect form data
     $name = $_POST["name"];
     $category = $_POST["category"];
     $description = $_POST["description"];
 
-    // Process thumbnail upload
-    $thumbnailDirectory = "../resources/imgs/thumbnails/"; // Specify thumbnail upload directory
+    $thumbnailDirectory = "../resources/imgs/thumbnails/"; 
     $thumbnailPath = $thumbnailDirectory . basename($_FILES["thumbnail"]["name"]);
 
-    // Handle multiple image uploads
     $imagePaths = [];
-    $imageDirectory = "../resources/imgs/images/"; // Specify images upload directory
+    $imageDirectory = "../resources/imgs/images/"; 
     foreach ($_FILES["images"]["tmp_name"] as $key => $tmp_name) {
         $imageFile = $imageDirectory . basename($_FILES["images"]["name"][$key]);
         if (move_uploaded_file($tmp_name, $imageFile)) {
             $imagePaths[] = $imageFile;
         } else {
             echo "Error moving uploaded file.";
-            exit; // Exit the script if an error occurs
+            exit; 
         }
     }
 
-    // Insert data into the database
     $sql = "INSERT INTO games (name, category, description, thumbnail, images) VALUES ('$name', '$category', '$description', '$thumbnailPath', '" . implode(",", $imagePaths) . "')";
 
     if (mysqli_query($conn, $sql)) {
-        // If the insertion is successful, move the uploaded files to their respective directories
         if (move_uploaded_file($_FILES["thumbnail"]["tmp_name"], $thumbnailPath)) {
             echo "Game added successfully.";
             header("Location: index.php");
@@ -51,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 
-    // Close database connection
     mysqli_close($conn);
 }
 ?>
@@ -71,27 +62,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <h2>Add a New Game</h2>
     <form action="" method="post" enctype="multipart/form-data">
 
-        <!-- name field -->
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
 
-        <!-- category field -->
         <label for="category">Category:</label>
         <input type="text" id="category" name="category" required>
 
-        <!-- description field -->
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" required>
 
-        <!-- thumbnail field -->
         <label for="thumbnail">Thumbnail:</label>
         <input type="file" id="thumbnail" name="thumbnail" required>
 
-        <!-- images field -->
         <label for="images">Images:</label>
         <input type="file" id="images" name="images[]" multiple required>
 
-        <!-- Submit button -->
         <button type="submit">Add Game</button>
         <a href="index.php" class="back-to-index-button">
             <button type="button">Back</button>

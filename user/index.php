@@ -1,20 +1,14 @@
 <?php
-    // Include your database connection file
     require("../connection.php"); 
 
-    // Check if the connection is successful
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Fetch data from the database
     $result = mysqli_query($conn, "SELECT * FROM games");
 ?>
 
-<!-- Your HTML and PHP code for displaying games here -->
-
 <?php
-    // Close the database connection
     mysqli_close($conn);
 ?>
 
@@ -26,7 +20,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Games</title>
     <style>
-        /* Add some basic styling for cards */
         .game-card {
             border: 1px solid #ddd;
             margin: 10px;
@@ -50,7 +43,6 @@
 
     <div>
         <?php
-        // Loop through the database results and display them in cards
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
             <div class="game-card">
@@ -69,7 +61,6 @@
     </div>
 
     <?php
-    // Close database connection
     ?>
 </body>
 </html>

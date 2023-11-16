@@ -71,7 +71,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <!-- LOGIN FORM -->
     <div class="background"></div>
     <div class="container">
         <div class="item">
@@ -134,7 +133,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </div>
-     <!-- SIGN UP FORM -->
 
     <script src="login.js"></script>
 </body>
