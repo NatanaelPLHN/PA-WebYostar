@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Process thumbnail upload
     $thumbnailDirectory = "../resources/imgs/thumbnails/"; // Specify thumbnail upload directory
     $thumbnailPath = $thumbnailDirectory . basename($_FILES["thumbnail"]["name"]);
-
+    
     // Handle multiple image uploads
     $imagePaths = [];
     $imageDirectory = "../resources/imgs/images/"; // Specify images upload directory
