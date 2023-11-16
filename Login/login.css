@@ -135,6 +135,7 @@ body{
     outline: none;
     font-size: 16px;
     padding-right: 28px;
+    color: #fff;
 
 
 }
@@ -205,3 +206,4 @@ body{
 .create-account p a:hover{
     text-decoration: underline;
 }
+

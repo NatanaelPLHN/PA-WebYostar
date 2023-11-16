@@ -1,8 +1,18 @@
 <?php
+
+// Include your database connection file
+require "../connection.php";
+session_start();
+
+if (!isset($_SESSION['login']) || !$_SESSION['isAdmin']) {
+    // Redirect to the login page or display an unauthorized message
+    header("Location: ../Login/login.php");
+    exit();
+}
+
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Include your database connection file
-    require "../connection.php";
 
     // Collect form data
     $name = $_POST["name"];
@@ -12,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Process thumbnail upload
     $thumbnailDirectory = "../resources/imgs/thumbnails/"; // Specify thumbnail upload directory
     $thumbnailPath = $thumbnailDirectory . basename($_FILES["thumbnail"]["name"]);
-    
+
     // Handle multiple image uploads
     $imagePaths = [];
     $imageDirectory = "../resources/imgs/images/"; // Specify images upload directory
@@ -48,11 +58,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="crete.css">
     <title>Games Input Form</title>
 </head>
+
 <body>
     <h2>Add a New Game</h2>
     <form action="" method="post" enctype="multipart/form-data">
@@ -72,14 +85,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <!-- thumbnail field -->
         <label for="thumbnail">Thumbnail:</label>
         <input type="file" id="thumbnail" name="thumbnail" required>
-        
+
         <!-- images field -->
         <label for="images">Images:</label>
         <input type="file" id="images" name="images[]" multiple required>
 
-
         <!-- Submit button -->
         <button type="submit">Add Game</button>
+        <a href="index.php" class="back-to-index-button">
+            <button type="button">Back</button>
+        </a>
     </form>
+
 </body>
+
 </html>

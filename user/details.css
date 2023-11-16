@@ -1,0 +1,126 @@
+
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f0f0f0;
+    }
+
+    .details-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        background-color: #fff;
+        border: 10px double #e68a00;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #e68a00;
+        text-align: center;
+    }
+
+    p {
+        color: #333;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    img {
+        display: block;
+        margin: 20px auto;
+        max-width: 100%;
+        height: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-container {
+      position: relative;
+      max-width: 600px;
+      margin: 20px auto;
+      overflow: hidden;
+  }
+  
+  .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+  }
+  
+  .carousel-item {
+      flex: 0 0 100%;
+      box-sizing: border-box;
+  }
+
+  #prevBtn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      background: #e68a00;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+  }
+  
+  #nextBtn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      background: #e68a00;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+  }
+  
+  #prevBtn:hover,
+  #nextBtn:hover {
+      background-color: #cc7a00;
+  }
+  
+  img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px; /* Optional: Add border-radius to images */
+  }
+  
+
+    h3 {
+        color: #333;
+        margin-top: 20px;
+    }
+
+    .reviews-section {
+      margin-top: 20px;
+  }
+  
+  .review-box {
+      border: 2px solid #e68a00;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      background-color: #fff;
+  }
+  
+  .review-rating {
+      font-weight: bold;
+      color: #e68a00;
+  }
+  
+  .review-text {
+      margin-top: 10px;
+  }
+  
+
+

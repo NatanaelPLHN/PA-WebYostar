@@ -1,6 +1,13 @@
 <?php
 // Include your database connection file
-include("../connection.php");
+require "../connection.php";
+session_start();
+
+if (!isset($_SESSION['login']) || !$_SESSION['isAdmin']) {
+    // Redirect to the login page or display an unauthorized message
+    header("Location: ../Login/login.php");
+    exit();
+}
 
 // Check if the connection is successful
 if (!$conn) {

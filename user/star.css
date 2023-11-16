@@ -1,0 +1,143 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 50px;
+    padding: 20px;
+    background-color: rgba(240, 240, 240, 0.8);
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../resources/imgs/assets/20.jpg);
+    background-size: cover;
+}
+
+h2 {
+    color: #fff;
+    text-align: center;
+}
+
+form {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.08);
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 255, 0.5);
+    box-sizing: border-box;
+    backdrop-filter: blur(10px);
+    border: 2px solid transparent;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+button {
+    background-color: #e68a00;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: auto;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+button:hover {
+    background-color: #cc7a00;
+}
+
+.review-section {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.back-button {
+    background-color: #e68a00;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #cc7a00;
+}
+
+/* Rating Stars Styles */
+.rating-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.star-label {
+    margin-right: 20px;
+    cursor: pointer;
+    color: #ccc;
+    font-size: 24px;
+}
+
+/* Hide radio inputs */
+input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+}
+
+/* Style the stars */
+input[type="radio"] + label:before {
+    content: '\2605';
+    font-size: 24px;
+    padding: 15px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+/* Change star color on hover */
+input[type="radio"]:hover + label:before,
+input[type="radio"]:checked + label:before {
+    color: #e68a00;
+}

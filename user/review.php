@@ -2,6 +2,13 @@
 // Include your database connection file
 require "../connection.php";
 
+session_start();
+
+if (!isset($_SESSION['login'])) {
+    header("Location: ../Login/login.php");
+    exit();
+}
+
 // Check if the form has been submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect form data
@@ -39,6 +46,7 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="star.css">
     <title>Rating & Review </title>
 </head>
 
@@ -50,21 +58,22 @@ if (isset($_GET['id'])) {
 
         <div style="display: flex; flex-direction: row;">
             <label for="rating">Rating:</label>
-            <input type="radio" id="star5" name="rating" value="5">
-            <label for="star5">5 stars</label>
-            <input type="radio" id="star4" name="rating" value="4">
-            <label for="star4">4 stars</label>
+            <input type="radio" id="star5" name="rating" value="1">
+            <label for="star5">1</label>
+            <input type="radio" id="star4" name="rating" value="2">
+            <label for="star4">2</label>
             <input type="radio" id="star3" name="rating" value="3">
-            <label for="star3">3 stars</label>
-            <input type="radio" id="star2" name="rating" value="2">
-            <label for="star2">2 stars</label>
-            <input type="radio" id="star1" name="rating" value="1">
-            <label for="star1">1 star</label>
+            <label for="star3">3</label>
+            <input type="radio" id="star2" name="rating" value="4">
+            <label for="star2">4</label>
+            <input type="radio" id="star1" name="rating" value="5">
+            <label for="star1">5</label>
         </div>
 
-        <div>
+        <div class="review-section">
             <label for="review">Review:</label>
             <input type="text" id="review" name="review" required>
+            <button type="button" onclick="window.location.href='index.php'">Back</button>
             <!-- <textarea id="review" name="review" placeholder="Write your review here..."></textarea> -->
         </div>
 

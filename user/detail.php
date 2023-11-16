@@ -25,41 +25,8 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="details.css">
     <title>Game Details</title>
-    <style>
-        .carousel-container {
-            max-width: 300px;
-            max-height: 300px;
-            margin: auto;
-            overflow: hidden;
-        }
-
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .carousel-item {
-            width: 100%;
-        }
-
-        #prevBtn, #nextBtn {
-            cursor: pointer;
-            font-size: 24px;
-            color: #333;
-            background-color: #fff;
-            border: none;
-            outline: none;
-        }
-
-        #prevBtn {
-            float: left;
-        }
-
-        #nextBtn {
-            float: right;
-        }
-    </style>
 </head>
 
 <body>
@@ -67,11 +34,12 @@ if (isset($_GET['id'])) {
     // Check if game details are found
     if ($gameRow = mysqli_fetch_assoc($gameResult)) {
     ?>
+    <div class="details-container">
         <h2><?php echo $gameRow['name']; ?> Details</h2>
 
         <p>Category: <?php echo $gameRow['category']; ?></p>
         <img src="<?php echo $gameRow['thumbnail']; ?>" alt="Game thumbnail" style="max-width: 300px;">
-
+    </div>
         <!-- Carousel for displaying images -->
         <?php
         $imagePaths = explode(",", $gameRow['images']);
@@ -99,15 +67,19 @@ if (isset($_GET['id'])) {
 
         <h3>Reviews:</h3>
 
+        <div class="reviews-section">
         <?php
         // Loop through reviews and display them
         while ($reviewRow = mysqli_fetch_assoc($reviewsResult)) {
         ?>
-            <p>Rating: <?php echo $reviewRow['rating']; ?></p>
-            <p>Review: <?php echo $reviewRow['review']; ?></p>
+            <div class="review-box">
+            <p class="review-rating">Rating: <?php echo $reviewRow['rating']; ?></p>
+            <p class="review-text">Review: <?php echo $reviewRow['review']; ?></p>
+            </div>
         <?php
         }
         ?>
+        </div>
     <?php
     } else {
         // Handle the case where no game details are found for the specified ID

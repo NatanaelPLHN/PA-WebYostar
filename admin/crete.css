@@ -1,0 +1,72 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #e6f7ff; /* Light blue background */
+}
+
+h2 {
+    color: #007acc; /* Dark blue text */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #e6f7ff; /* Light blue form background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #007acc; /* Dark blue label text */
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #66a3ff; /* Medium blue border */
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+input[type="file"] {
+    margin-top: 5px;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #66a3ff; /* Medium blue border */
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #007acc; /* Dark blue border on focus */
+}
+
+button {
+    background-color: #007acc; /* Dark blue button background */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #005580; /* Slightly darker blue on hover */
+}

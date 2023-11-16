@@ -1,6 +1,13 @@
 <?php
 // Include your database connection file
-include("connection.php");
+require("connection.php");
+
+session_start();
+
+// if (!isset($_SESSION['email'])) {
+//     header("Location: login.php");
+//     exit();
+// }
 
 // Check if the connection is successful
 if (!$conn) {
@@ -8,7 +15,8 @@ if (!$conn) {
 }
 
 // Fetch data from the database
-$result = mysqli_query($conn, "SELECT * FROM games");
+$resultgame = mysqli_query($conn, "SELECT * FROM games");
+
 ?>
 
 <!DOCTYPE html>
@@ -66,16 +74,24 @@ $result = mysqli_query($conn, "SELECT * FROM games");
                         <a href="#">
                             <div class="icons">
                                 <div class="imgBx">
-                                    <img src="resources/imgs/assets/Arona_result.png">
+                                    <img src="resources/imgs/assets/Arona_resultgame.png">
                                 </div>
                             </div>
-                            <div class="text">KELOMPOK 3</div>
+                            <div class="text">
+                                <?php
+
+                                ?>
+                            </div>
                         </a>
                     </li>
                     <li style="--bg:#333;">
-                        <a href="login/login.php">
-                            <div class="icon"><img src="resources/imgs/assets/right-from-bracket-solid.svg"></div>
-                            <div class="text">LOGIN</div>
+                        <?php
+                        if (isset($_SESSION['login'])) {
+                            echo '<a href="Login/logout.php"><div class="icon"><img src="resources/imgs/assets/right-from-bracket-solid.svg"></div> </a>';
+                        } else {
+                            echo '<a href="login/Login.php"><div class="icon"><img src="resources/imgs/assets/right-from-bracket-solid.svg"></div> </a>';
+                        }
+                        ?>
                         </a>
                     </li>
                 </div>
@@ -108,8 +124,8 @@ $result = mysqli_query($conn, "SELECT * FROM games");
         <div class="container">
             <h2>Game List</h2>
             <?php
-            // Loop through the database results and display them in cards
-            while ($row = mysqli_fetch_assoc($result)) {
+            // Loop through the database resultgames and display them in cards
+            while ($row = mysqli_fetch_assoc($resultgame)) {
             ?>
                 <div class="game-list">
                     <div class="game-entry">
@@ -128,7 +144,7 @@ $result = mysqli_query($conn, "SELECT * FROM games");
         </div>
     </section>
 
-    <section id="reviews">
+    <!-- <section id="reviews">
         <div class="container">
             <h2>Game Reviews</h2>
             <div class="review-list">
@@ -150,7 +166,7 @@ $result = mysqli_query($conn, "SELECT * FROM games");
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <script>
         let menuToggle = document.querySelector('.menuToggle');

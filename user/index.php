@@ -1,6 +1,6 @@
 <?php
     // Include your database connection file
-    include("../connection.php"); 
+    require("../connection.php"); 
 
     // Check if the connection is successful
     if (!$conn) {

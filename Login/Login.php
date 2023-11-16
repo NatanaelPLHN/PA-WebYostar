@@ -1,6 +1,8 @@
 <?php
 require('../connection.php');
 
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // (Sign Up)
     if (isset($_POST['signup'])) {
@@ -40,12 +42,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $userData = mysqli_fetch_assoc($result);
     
             // Cek jenis akun (admin atau user)
-            if ($userData['username'] === 'admin' && $userData['email'] === 'admin@gmail.com' && $userData['password'] === 'admin123') {
+            if ($userData['email'] === 'admin@gmail.com' && $userData['password'] === 'admin123') {
                 // Jika akun adalah admin, redirect ke halaman admin
+                $_SESSION['login'] = true;
+                $_SESSION['isAdmin'] = true;
                 echo "<script>window.location.href = '../admin/index.php';</script>";
                 exit();
             } else {
                 // Jika bukan akun admin, redirect ke halaman user
+                $_SESSION['login'] = true;
+                $_SESSION['isAdmin'] = false;
                 echo "<script>window.location.href = '../index.php';</script>";
                 exit();
             }
@@ -69,18 +75,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="background"></div>
     <div class="container">
         <div class="item">
-            <h2 class="logo"><i class='bx bxl-xing'></i>Yostar</h2>
+            <h2 class="logo">Yostar</h2>
             <div class="text-item">
                 <h2>Welcome! <br><span>
                 </span></h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, repellendus?</p>
-                <div class="social-icon">
-                    <a href="#"><i class='bx bxl-facebook'></i></a>
-                    <a href="#"><i class='bx bxl-twitter'></i></a>
-                    <a href="#"><i class='bx bxl-youtube'></i></a>
-                    <a href="#"><i class='bx bxl-instagram'></i></a>
-                    <a href="#"><i class='bx bxl-linkedin'></i></a>
-                </div>
+                <p>KELOMPOK 3</p>
             </div>
         </div>
         <div class="login-section">
@@ -96,10 +95,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <span class="icon"><i class='bx bxs-lock-alt' ></i></span>
                         <input type="password" name="password" required>
                         <label>Password</label>
-                    </div>
-                    <div class="remember-password">
-                        <label for=""><input type="checkbox">Remember Me</label>
-                        <a href="#">Forget Password</a>
                     </div>
                     <button class="btn" type="submit" name="login">Login In</button>
                     <div class="create-account">
